@@ -1,6 +1,8 @@
 
 function setActive(element){
-	element.className = "activerow";
+	element.classList.remove("row");
+	element.classList.add("activerow");
+	// classList.toggle("name")
 }
 
 function add() {
