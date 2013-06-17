@@ -17,7 +17,7 @@
 		    <tr>
 <%-- 		        <td class="row" onclick=""> ${host.name} ${host.address}</td> --%>
 		        <td class="row"> 
-		        	<a href="/virtgraph-client/vms/?name=${host.name}?address=${host.address}">"${host.name}"</a> 
+		        	<a href="/virtgraph-client/vms/?name=${host.name}&address=${host.address}">"${host.name}"</a> 
 	        	</td>
 		    </tr>
 		</c:forEach>

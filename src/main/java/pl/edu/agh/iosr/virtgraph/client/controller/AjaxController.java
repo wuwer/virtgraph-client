@@ -29,8 +29,10 @@ public class AjaxController {
 
     @RequestMapping(value = "/startvm", method = RequestMethod.POST)
     public @ResponseBody
-    Boolean home(@RequestParam(value = "vmid", required = true) String vmid,
+    Boolean startvm(@RequestParam(value = "vmid", required = true) String vmid,
+            @RequestParam(value = "hostAddr", required = true) String hostAddr,
             Model model) {
+        System.out.println("The host address is:" + hostAddr);
         return commService.startVm(vmid);
     }
 

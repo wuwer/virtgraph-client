@@ -15,11 +15,12 @@
 		<table>
 		<c:forEach items="${vmlist}" var="vm">
 		    <tr>
-		        <td class="row" onclick="startvm(this)"> ${vm.name} ${vm.id} ${vm.running}</td>
+		        <td class="row" onclick="startvm(this, '${vm.id}', '${hostAddr}')"> ${vm.name} ${vm.id} ${vm.running}</td>
 		        <!--td><a href="delete/${issue.id}">delete</a></td-->
 		    </tr>
 		</c:forEach>
 		</table>
 		</c:if>
+    	<a href="/virtgraph-client/">"Home"</a> 
 	</body>
 </html>

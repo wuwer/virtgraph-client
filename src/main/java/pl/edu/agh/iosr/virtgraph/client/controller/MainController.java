@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import pl.edu.agh.iosr.virtgraph.client.service.CommunicationService;
 import pl.edu.agh.iosr.virtgraph.model.Host;
@@ -41,15 +42,18 @@ public class MainController {
 
     @RequestMapping(value = "/vms", method = RequestMethod.GET)
     public String vms(
-    // @RequestParam(value = "name", required = true) String name,
-    // @RequestParam(value = "address", required = true) String hostAddress,
+            @RequestParam(value = "name", required = true) String name,
+            @RequestParam(value = "address", required = true) String hostAddress,
             Locale locale, Model model) {
 
         // add host name and address to the model
+        System.out.println("Host name: " + name);
+        System.out.println("Host address: " + hostAddress);
 
         model.addAttribute("vmlist", commService.getVMs(
         // new Host(name, hostAddress)).getVms());
                 new Host("xxx", "yyy")).getVms());
+        model.addAttribute("hostAddr", hostAddress);
         return "vms";
     }
 
