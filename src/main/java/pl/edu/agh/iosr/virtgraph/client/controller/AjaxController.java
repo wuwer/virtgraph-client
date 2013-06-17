@@ -29,21 +29,26 @@ public class AjaxController {
 
     @RequestMapping(value = "/startvm", method = RequestMethod.POST)
     public @ResponseBody
-    Boolean startvm(@RequestParam(value = "vmid", required = true) String vmid,
+    Boolean startVm(@RequestParam(value = "vmid", required = true) String vmid,
             @RequestParam(value = "hostAddr", required = true) String hostAddr,
             Model model) {
         System.out.println("The host address is:" + hostAddr);
-        return commService.startVm(vmid);
+        return commService.toggleVm(hostAddr, vmid);
     }
 
+    @RequestMapping(value = "/startservice", method = RequestMethod.POST)
+    public @ResponseBody
+    Boolean startService(
+            @RequestParam(value = "vmid", required = true) String vmid,
+            @RequestParam(value = "hostAddr", required = true) String hostAddr,
+            @RequestParam(value = "serviceName", required = true) String serviceName,
+            Model model) {
+        return commService.startService(hostAddr, vmid, serviceName);
+    }
     /*
      * @RequestMapping(value = "/startvm", method = RequestMethod.POST) public @ResponseBody Integer home(Model model) {
      * return 1; }
      */
-    @RequestMapping(value = "/startvm", method = RequestMethod.GET)
-    public String test(Model model) {
-        return "empty";
-    }
 
     /*
      * @RequestMapping(value = "/compare", method = RequestMethod.GET) public String compare(@RequestParam("input1")

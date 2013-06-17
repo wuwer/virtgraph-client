@@ -52,9 +52,27 @@ public class MainController {
 
         model.addAttribute("vmlist", commService.getVMs(
         // new Host(name, hostAddress)).getVms());
-                new Host("xxx", "yyy")).getVms());
+                new Host(name, hostAddress)).getVms());
         model.addAttribute("hostAddr", hostAddress);
         return "vms";
+    }
+
+    @RequestMapping(value = "/services", method = RequestMethod.GET)
+    public String services(
+            @RequestParam(value = "address", required = true) String hostAddress,
+            @RequestParam(value = "vmid", required = true) String vmid,
+            Locale locale, Model model) {
+
+        // add host name and address to the model
+        System.out.println("Host address: " + hostAddress);
+        System.out.println("Vm id: " + vmid);
+
+        model.addAttribute("servicelist", commService.getServices(hostAddress,
+                vmid).getServices());
+
+        model.addAttribute("hostAddr", hostAddress);
+        model.addAttribute("vmid", vmid);
+        return "services";
     }
 
     /*

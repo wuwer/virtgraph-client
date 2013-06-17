@@ -19,3 +19,19 @@ function startvm(element, vmidArg, hostAddrArg) {
 				});
 	});
 }
+
+function startservice(element, serviceNameArg, vmidArg, hostAddrArg) {
+	element.classList.remove("row");
+	element.classList.add("activerow");
+	console.log("Attempting to start the vm");
+	
+	//var jq = jquery.noconflict();
+	$(function () {
+		$.post("/virtgraph-client/startservice",
+//				{},
+				{vmid: vmidArg, hostAddr: hostAddrArg, serviceName: serviceNameArg},
+				function (data) {
+//					jq("#sum").replacewith('<span id="sum">' + data + '</span>');
+				});
+	});
+}

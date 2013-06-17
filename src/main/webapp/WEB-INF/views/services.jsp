@@ -10,15 +10,12 @@
 	</head>
 	<body>
 		<img src="<c:url value="/resources/img/virtgraph.gif"/>" alt="logo">
-		<h3>Virtual Machines</h3>
-		<c:if  test="${!empty vmlist}">
+		<h3>Services</h3>
+		<c:if  test="${!empty servicelist}">
 		<table>
-		<c:forEach items="${vmlist}" var="vm">
+		<c:forEach items="${servicelist}" var="service">
 		    <tr>
-		        <td class="row" onclick="startvm(this, '${vm.id}', '${hostAddr}')"> ${vm.name} ${vm.id} ${vm.running}
-		        	<a href="/virtgraph-client/services/?address=${hostAddr}&vmid=${vm.id}">services</a> 
-		        </td>
-		        <!--td><a href="delete/${issue.id}">delete</a></td-->
+		        <td class="row" onclick="startservice(this, '${service.name}', '${vmid}', '${hostAddr}'  )"> ${service.name} </td>
 		    </tr>
 		</c:forEach>
 		</table>

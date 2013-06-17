@@ -1,9 +1,12 @@
 .row{
 	width: 200px;
-	background-color: green;
+	background-color: #EBF5F5;
 }
 
 .activerow{
 	width: 200px;
-	background-color: blue;
+	background-color: #76F595;
 }
+
+
+/* FF8CB4 -  light red, not running*/
