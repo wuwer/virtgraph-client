@@ -5,8 +5,17 @@ function setActive(element){
 }
 
 function startvm(element, vmidArg, hostAddrArg) {
-	element.classList.remove("row");
-	element.classList.add("activerow");
+	if ($(element).hasClass("row"))
+	{
+		element.classList.remove("row");
+		element.classList.add("activerow");
+	}
+	else
+	{
+		element.classList.remove("activerow");
+		element.classList.add("row");
+		
+	}
 	console.log("Attempting to start the vm");
 	
 	//var jq = jquery.noconflict();
