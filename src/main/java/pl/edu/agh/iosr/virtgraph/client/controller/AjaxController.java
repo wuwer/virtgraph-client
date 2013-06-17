@@ -43,7 +43,7 @@ public class AjaxController {
             @RequestParam(value = "hostAddr", required = true) String hostAddr,
             @RequestParam(value = "serviceName", required = true) String serviceName,
             Model model) {
-        return commService.startService(hostAddr, vmid, serviceName);
+        return commService.toggleService(hostAddr, vmid, serviceName);
     }
     /*
      * @RequestMapping(value = "/startvm", method = RequestMethod.POST) public @ResponseBody Integer home(Model model) {
