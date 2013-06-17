@@ -9,6 +9,7 @@
 		<script type="text/javascript" src="<c:url value="/resources/js/script.js"/>" ></script>
 	</head>
 	<body>
+		<img src="<c:url value="/resources/img/virtgraph.gif"/>" alt="logo">
 		<h3>Virtual Machines</h3>
 		<c:if  test="${!empty vmlist}">
 		<table>
