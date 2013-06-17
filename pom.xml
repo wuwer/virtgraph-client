@@ -2,14 +2,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.wuwer</groupId>
-	<artifactId>gtdplanner</artifactId>
-	<name>GTDPlanner</name>
-	<packaging>war</packaging>
-	<version>1.0.0-BUILD-SNAPSHOT</version>
+    <groupId>pl.edu.agh.iosr.virtgraph</groupId>
+    <artifactId>virtgraph-client</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
+    <url>http://maven.apache.org</url>
 	<properties>
 		<java-version>1.7</java-version>
-		<org.springframework-version>3.1.1.RELEASE</org.springframework-version>
+		<org.springframework-version>3.1.4.RELEASE</org.springframework-version>
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
@@ -43,6 +43,13 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
                         
+        <!-- RESTful http client  -->
+        <dependency>
+		    <groupId>com.sun.jersey</groupId>
+		    <artifactId>jersey-client</artifactId>
+		    <version>1.17.1</version>
+		</dependency>
+            
 				
 		<!-- AspectJ -->
 		<dependency>
@@ -121,7 +128,7 @@
 		</dependency>
 		
 		<!-- non-template dependancies -->
-		<dependency>
+<!-- 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
 			<version>4.1.11.Final</version>
@@ -131,7 +138,7 @@
 			<artifactId>postgresql</artifactId>
 			<version>9.1-901.jdbc4</version>
 		</dependency>
-            
+ -->            
 		
 		<!-- dependency>
 			<groupId>org.hibernate</groupId>
@@ -189,6 +196,42 @@
                 <configuration>
                     <mainClass>org.test.int1.Main</mainClass>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>maven-jetty-plugin</artifactId>
+                <version>6.1.10</version>
+                <configuration>
+                    <scanIntervalSeconds>10</scanIntervalSeconds>
+                    <stopKey>foo</stopKey>
+                    <stopPort>9966</stopPort>
+                    <connectors>
+			            <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+				              <port>9090</port>
+				              <maxIdleTime>60000</maxIdleTime>
+			            </connector>
+                    </connectors>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>start-jetty</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <scanIntervalSeconds>0</scanIntervalSeconds>
+                            <daemon>true</daemon>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>stop-jetty</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>stop</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
