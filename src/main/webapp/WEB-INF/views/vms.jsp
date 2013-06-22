@@ -18,13 +18,13 @@
 			    <c:choose>
 				      <c:when test="${vm.running=='true'}">
 					        <td class="activerow" onclick="startvm(this, '${vm.id}', '${hostAddr}')"> ${vm.name} ${vm.id} ${vm.running}
-					        	<a href="/virtgraph-client/services/?address=${hostAddr}&vmid=${vm.id}">services</a> 
-					        </td>
+					        	<a href="/virtgraph-client/services/?address=${hostAddr}&vmid=${vm.id}">services</a>  
+				        	</td>
 				      </c:when>
 				      <c:otherwise>
-					        <td class="row" onclick="startvm(this, '${vm.id}', '${hostAddr}')"> ${vm.name} ${vm.id} ${vm.running}
+					        <td class="row" onclick="startvm(this, '${vm.id}', '${hostAddr}')"> ${vm.name} ${vm.id} ${vm.running} 
 					        	<a href="/virtgraph-client/services/?address=${hostAddr}&vmid=${vm.id}">services</a> 
-					        </td>
+				        	</td>
 				      </c:otherwise>
 				</c:choose>
 		    </tr>

@@ -15,7 +15,7 @@
 		<table>
 		<c:forEach items="${servicelist}" var="service">
 		    <tr>
-		        <td class="row" onclick="startservice(this, '${service.name}', '${vmid}', '${hostAddr}'  )"> ${service.name} </td>
+		        <td class="row" onclick="startservice(this, '${service.name}', '${vmid}', '${hostAddr}'  )"> ${service.name} running: ${service.start}</td>
 		    </tr>
 		</c:forEach>
 		</table>

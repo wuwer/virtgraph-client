@@ -26,9 +26,14 @@ public class CommunicationService {
 
 	/* private WebResource hypervisorService; */
 
+	/*
+	 * private URI getBaseServerURI() { return UriBuilder.fromUri(
+	 * "http://localhost:8080/virtgraph/hypervisor/test/").build(); }
+	 */
 	private URI getBaseServerURI() {
 		return UriBuilder.fromUri(
 				"http://localhost:8080/virtgraph/hypervisor/test/").build();
+		// "http://10.20.127.152:8080/virtgraph/server/server/").build();
 	}
 
 	/*
@@ -44,18 +49,20 @@ public class CommunicationService {
 	}
 
 	public HostList getHosts() {
-		return serverService.path("hostlist").accept(MediaType.APPLICATION_XML)
+		return serverService.path("hosts").accept(MediaType.APPLICATION_XML)
 				.get(HostList.class);
 	}
 
 	public VMList getVMs(Host host) {
-		return serverService.path("vmlist").accept(MediaType.APPLICATION_XML)
-				.get(VMList.class);
+		return serverService.path("hosts").path(host.getName()).path("vms")
+				.accept(MediaType.APPLICATION_XML).get(VMList.class);
 	}
 
-	public ServiceList getServices(String address, String vmid) {
-		return serverService.path("servicelist")
-				.accept(MediaType.APPLICATION_XML).get(ServiceList.class);
+	public ServiceList getServices(String hostName, String vmid) {
+		System.out.println("getServices. hostName: " + hostName);
+		return serverService.path("hosts").path(hostName).path("vms")
+				.path(vmid).path("services").accept(MediaType.APPLICATION_XML)
+				.get(ServiceList.class);
 	}
 
 	private VirtualMachine getVmById(Host host, String vmid) {
@@ -70,7 +77,7 @@ public class CommunicationService {
 	private pl.edu.agh.iosr.virtgraph.model.Service getServiceByName(Host host,
 			String vmid, String serviceName) {
 		for (pl.edu.agh.iosr.virtgraph.model.Service service : getServices(
-				host.getAddress(), vmid).getServices()) {
+				host.getName(), vmid).getServices()) {
 			if (service.getName().equals(serviceName)) {
 				return service;
 			}
@@ -83,7 +90,7 @@ public class CommunicationService {
 		Client client = Client.create(new DefaultClientConfig());
 		WebResource hypervisorService = client.resource(hypervisorUri);
 		// FIXME!!!
-		VirtualMachine vm = getVmById(new Host("fakename", hostAddr), vmid);
+		VirtualMachine vm = getVmById(new Host("devHostName", hostAddr), vmid);
 		vm.setRunning(!vm.isRunning());
 		hypervisorService.path("vms").type(MediaType.APPLICATION_XML)
 				.post(VirtualMachine.class, vm);
@@ -97,7 +104,7 @@ public class CommunicationService {
 		WebResource hypervisorService = client.resource(hypervisorUri);
 		// FIXME!!!
 		pl.edu.agh.iosr.virtgraph.model.Service service = getServiceByName(
-				new Host("fakename", hostAddr), vmid, serviceName);
+				new Host("devHostName", hostAddr), vmid, serviceName);
 		service.setStart(!service.isStart());
 		hypervisorService.path("vms").path(vmid).path("services")
 				.type(MediaType.APPLICATION_XML)
