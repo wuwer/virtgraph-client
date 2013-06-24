@@ -33,8 +33,8 @@ public class CommunicationService {
      */
     private URI getBaseServerURI() {
         return UriBuilder.fromUri(
-                "http://localhost:8080/virtgraph/hypervisor/test/").build();
-        // "http://10.20.127.152:8080/virtgraph/server/server/").build();
+        // "http://localhost:8080/virtgraph/hypervisor/test/").build();
+                "http://192.168.0.25:8080/virtgraph/server/server/").build();
     }
 
     /*
